@@ -101,5 +101,13 @@ categorySelect.addEventListener("change", async () => {
     }
 });
 
+productsContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("details-btn")) {
+        const productId = e.target.dataset.id;
+
+        window.location.href = `product.html?id=${productId}`;
+    }
+});
+
 getProducts();
 getCategories();
