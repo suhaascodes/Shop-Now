@@ -253,3 +253,33 @@ nav {
 .remove-btn:active {
     transform: scale(0.97);
 }
+#pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+#pagination button {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    border: 1px solid #d1d5db;
+    transition: all 0.3s ease;
+}
+
+#pagination button:hover {
+    border-color: darkorange;
+    color: darkorange;
+}
+
+.active-page {
+    background-color: darkorange !important;
+    color: white;
+}
+#pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

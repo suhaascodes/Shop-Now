@@ -2,15 +2,31 @@ const productsContainer = document.getElementById("products");
 const searchForm = document.getElementById("search-form");
 const categorySelect = document.getElementById("category");
 const searchInput = document.getElementById("search");
+const paginationContainer = document.getElementById("pagination");
 
 let allProducts = [];
 let currentProducts = [];
 
+const productsPerPage = 10;
+let currentPage = 1;
+
 function displayProducts(products) {
+
     productsContainer.innerHTML = "";
 
-    products.forEach((product) => {
-        const productElement = document.createElement("div");
+    const startIndex =
+        (currentPage - 1) * productsPerPage;
+
+    const endIndex =
+        startIndex + productsPerPage;
+
+    const paginatedProducts =
+        products.slice(startIndex, endIndex);
+
+    paginatedProducts.forEach((product) => {
+
+        const productElement =
+            document.createElement("div");
 
         productElement.classList.add("card");
 
@@ -26,6 +42,63 @@ function displayProducts(products) {
 
         productsContainer.appendChild(productElement);
     });
+
+    renderPagination(products);
+}
+
+function renderPagination(products) {
+
+    paginationContainer.innerHTML = "";
+
+    const totalPages =
+        Math.ceil(products.length / productsPerPage);
+
+    const prevBtn = document.createElement("button");
+    prevBtn.textContent = "← Prev";
+
+    prevBtn.disabled = currentPage === 1;
+
+    prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            displayProducts(products);
+        }
+    });
+
+    paginationContainer.appendChild(prevBtn);
+
+
+    for (let i = 1; i <= totalPages; i++) {
+
+        const button = document.createElement("button");
+
+        button.textContent = i;
+
+        if (i === currentPage) {
+            button.classList.add("active-page");
+        }
+
+        button.addEventListener("click", () => {
+            currentPage = i;
+            displayProducts(products);
+        });
+
+        paginationContainer.appendChild(button);
+    }
+
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "Next →";
+
+    nextBtn.disabled = currentPage === totalPages;
+
+    nextBtn.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayProducts(products);
+        }
+    });
+
+    paginationContainer.appendChild(nextBtn);
 }
 
 async function getProducts() {
@@ -67,6 +140,7 @@ async function getCategories() {
 }
 
 function filterProducts() {
+    currentPage = 1;
     const searchTerm = searchInput.value.toLowerCase();
 
     const filteredProducts = currentProducts.filter((product) =>
