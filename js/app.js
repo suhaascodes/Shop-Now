@@ -9,6 +9,9 @@ function displayProducts(products) {
             <h2>${product.title}</h2>
             <p class="category">${product.category}</p>
             <p class="price">Price: $${product.price}</p>
+            <button class="details-btn" data-id="${product.id}">
+                View Details
+            </button>
         `;
         productsContainer.appendChild(productElement);
     });
