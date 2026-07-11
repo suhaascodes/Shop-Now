@@ -11,7 +11,15 @@ const productsPerPage = 10;
 let currentPage = 1;
 
 function displayProducts(products) {
+    
+    if (products.length === 0) {
+    productsContainer.innerHTML =
+        '<div class="no-products"><h3>No products found 😔</h3></div>';
 
+    paginationContainer.innerHTML = "";
+
+    return;
+}
     productsContainer.innerHTML = "";
 
     const startIndex =
@@ -101,20 +109,49 @@ function renderPagination(products) {
     paginationContainer.appendChild(nextBtn);
 }
 
-async function getProducts() {
-    try {
-        const response = await fetch(
-            "https://fakestoreapi.com/products"
-        );
+function showSkeleton() {
 
-        const products = await response.json();
+    productsContainer.innerHTML = "";
+
+    for (let i = 0; i < 10; i++) {
+
+        productsContainer.innerHTML += `
+            <div class="skeleton-card">
+                <div class="skeleton-image"></div>
+
+                <div class="skeleton-title"></div>
+
+                <div class="skeleton-category"></div>
+
+                <div class="skeleton-price"></div>
+
+                <div class="skeleton-button"></div>
+            </div>
+        `;
+    }
+}
+
+async function getProducts() {
+
+    try {
+
+        showSkeleton();
+
+        const response =
+            await fetch("https://fakestoreapi.com/products");
+
+        const products =
+            await response.json();
 
         allProducts = products;
         currentProducts = products;
 
         displayProducts(products);
-    } catch (error) {
+
+    } catch(error) {
+
         console.error(error);
+
     }
 }
 
