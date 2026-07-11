@@ -1,14 +1,26 @@
-const wishlistContainer =
-    document.getElementById("wishlist-products");
+const wishlistContainer = document.getElementById("wishlist-products");
 
-const wishlist =
-    JSON.parse(localStorage.getItem("wishlist")) || [];
+const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
 displayWishlist();
 
 function displayWishlist() {
 
     wishlistContainer.innerHTML = "";
+
+    if (wishlist.length === 0) {
+    wishlistContainer.innerHTML = `
+        <div class="empty-wishlist">
+            <h2>❤️ Your wishlist is empty</h2>
+            <p>Browse products and add your favorites.</p>
+
+            <a href="index.html" class="browse-btn">
+                Browse Products
+            </a>
+        </div>
+    `;
+    return;
+}
 
     wishlist.forEach((product) => {
 
