@@ -7,8 +7,8 @@ function displayProducts(products) {
         productElement.innerHTML = `
             <img src="${product.image}" alt="${product.title}" />
             <h2>${product.title}</h2>
-            <p>${product.description.slice(0, 60)}...</p>
-            <p>Price: $${product.price}</p>
+            <p class="category">${product.category}</p>
+            <p class="price">Price: $${product.price}</p>
         `;
         productsContainer.appendChild(productElement);
     });

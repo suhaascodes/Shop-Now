@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #f8fafc;
 }
 header {
     position: sticky;
@@ -13,7 +14,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     height: 70px;
-    background-color: hsl(0, 0%, 20%);
+    background-color: #1f2937;
     width: 100%;
 }
 #logo {
@@ -29,6 +30,10 @@ nav {
     padding: 5px;
     border: none;
     border-radius: 5px;
+    background-color: white;
+}
+#search:focus {
+    outline: 2px solid darkorange;
 }
 #cart, #profile {
     color: white;
@@ -44,7 +49,7 @@ nav {
     text-align: center;
 }
 #search-button {
-    background-color: #4CAF50;
+    background-color: darkorange;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -64,30 +69,42 @@ nav {
 #products{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    padding:20px;
+    gap:30px;
+    padding:40px;
 }
 .card {
     border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
+    border-radius: 12px;
+    padding: 24px;
     text-align: center;
+    background-color: #fff;
+    transition:0.3s;
 }
 .card img {
     width: 100%;
     height: 200px;
     object-fit: contain;
 }
-.card h3{
-    font-size:16px;
-    height:80px;
-    overflow:hidden;
-}
-.card{
-    transition:0.3s;
-}
 
 .card:hover{
     transform:translateY(-5px);
     box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+.price {
+    color: darkorange;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.card h3 {
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin: 16px 0;
+    height: 90px;
+    overflow: hidden;
+}
+.category{
+    color:#64748b;
+    font-size:0.9rem;
+    text-transform:capitalize;
+    margin-bottom:10px;
 }
